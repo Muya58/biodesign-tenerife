@@ -52,3 +52,62 @@
 .quiz-step h2 { margin-bottom: 20px; }
 .quiz-step label { display: block; font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 6px; }
 .quiz-success { text-align: center; padding: 20px; }
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 30%, var(--bd-navy-800) 0%, var(--bd-navy-950) 70%);
+}
+.hero-sparkles {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 85%, var(--bd-sand-400), transparent),
+    radial-gradient(2px 2px at 35% 92%, var(--bd-sand-300), transparent),
+    radial-gradient(1.5px 1.5px at 50% 80%, var(--bd-sand-400), transparent),
+    radial-gradient(2px 2px at 65% 90%, var(--bd-sand-300), transparent),
+    radial-gradient(1.5px 1.5px at 80% 83%, var(--bd-sand-400), transparent),
+    radial-gradient(2px 2px at 90% 88%, var(--bd-sand-300), transparent),
+    radial-gradient(1px 1px at 15% 20%, rgba(79,184,196,.6), transparent),
+    radial-gradient(1px 1px at 70% 15%, rgba(79,184,196,.6), transparent),
+    radial-gradient(1px 1px at 45% 10%, rgba(79,184,196,.6), transparent);
+  background-repeat: no-repeat;
+  opacity: .8;
+  pointer-events: none;
+}
+.hero-emblem-stage {
+  perspective: 800px;
+  width: 120px; height: 84px;
+  margin-bottom: 28px;
+  z-index: 1;
+}
+.hero-emblem {
+  width: 100%; height: 100%;
+  animation: hero-spin 6s linear infinite;
+  transform-style: preserve-3d;
+}
+@keyframes hero-spin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+.hero-wordmark {
+  font-family: var(--font-h); font-weight: 800;
+  font-size: clamp(40px, 7vw, 72px);
+  color: #fff; letter-spacing: -.01em;
+  z-index: 1;
+}
+.hero-wordmark .dot { color: var(--bd-sand-400); }
+.hero-by-line {
+  z-index: 1;
+  font-size: 14px; font-weight: 600; letter-spacing: .04em;
+  color: rgba(255,255,255,.5);
+  margin-top: 4px;
+}
+.hero-by-line strong { color: rgba(255,255,255,.8); }
+.hero-cta-row { z-index: 1; display: flex; gap: 14px; margin-top: 32px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-emblem { animation: none; }
+}

@@ -85,10 +85,13 @@ grep -rl "biodesign-tenerife.com" --include="*.html" .
 
 Cosas fuera del alcance de Fase 1 que conviene valorar antes o poco después del lanzamiento:
 
-- **Logo y tipografía oficiales.** El emblema del hero es una reconstrucción en SVG
-  hecha a partir de la foto de referencia, y el wordmark usa Poppins como aproximación.
-  Si consigues el brand kit oficial de Bio.design (SVG del logo + archivos de fuente),
-  se sustituyen sin tocar el resto del sitio.
+- ~~Logo y tipografía oficiales.~~ **Resuelto (2026-07-29).** El emblema y el wordmark
+  son ahora los oficiales, extraídos como vectores de la portada del catálogo en PDF
+  (venía en curvas, no rasterizado) mediante `scripts/extract-logo.py`. Las letras son
+  las reales de la marca, con su ®, no una fuente aproximada. Si Bio.design facilita
+  algún día su brand kit, basta con reemplazar `assets/img/emblem.svg` y `wordmark.svg`.
+  Nota: ambos SVG llevan el relleno en blanco fijo porque se incrustan con `<img>` sobre
+  fondo azul oscuro; para un fondo claro habría que generar una variante.
 - **`robots.txt` y `sitemap.xml`.** No están incluidos en Fase 1. Recomendable añadirlos
   antes de pedir indexación en Google Search Console.
 - **Datos de contacto propios.** Ahora mismo `contacto.html` usa el teléfono y el email

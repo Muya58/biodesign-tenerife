@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicita tu presupuesto | Bio.design Tenerife</title>
+  <meta name="description" content="Responde 3 pasos rápidos y recibe presupuesto para tu piscina de arena Bio.design en la provincia de Santa Cruz de Tenerife.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://biodesign-tenerife.com/cuestionario.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    .quiz-step label { margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+<div class="quiz-page" style="min-height:100vh; display:flex; flex-direction:column;">
+  <div style="padding:20px 24px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.06);">
+    <a href="index.html" class="brand-lockup">
+      <img src="assets/img/emblem.svg" alt="Bio.design" width="24" height="17">
+      <span class="brand-lockup-text">BIO.design</span>
+    </a>
+    <a href="index.html" style="font-size:13px;color:rgba(255,255,255,.4);">&larr; Volver al inicio</a>
+  </div>
+  <div style="height:3px; background:rgba(255,255,255,.08);">
+    <div id="quizProgress" style="height:100%; background:var(--bd-sand-400); border-radius:2px; transition:width .4s ease; width:0%;"></div>
+  </div>
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:48px 20px;">
+    <form id="quizForm" class="card" style="max-width:640px; width:100%;" onsubmit="return false;">
+
+      <div class="quiz-step">
+        <h2>¿Qué tipo de piscina buscas?</h2>
+        <label><input type="radio" name="poolType" data-field="poolType" value="privada" checked> Piscina privada (vivienda particular)</label>
+        <label><input type="radio" name="poolType" data-field="poolType" value="publica"> Piscina pública (hotel, urbanización, negocio)</label>
+      </div>
+
+      <div class="quiz-step" style="display:none;">
+        <h2>Cuéntanos más</h2>
+        <label>Tamaño aproximado (m&sup2;)<input type="number" data-field="sizeM2" class="quiz-input" placeholder="Ej. 40"></label>
+        <label>Ubicación (municipio, Tenerife)<input type="text" data-field="location" class="quiz-input" placeholder="Ej. La Laguna"></label>
+        <label>Presupuesto orientativo
+          <select data-field="budgetRange" class="quiz-input">
+            <option value="15000-25000">15.000&euro; - 25.000&euro;</option>
+            <option value="25000-40000">25.000&euro; - 40.000&euro;</option>
+            <option value="40000+">Más de 40.000&euro;</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="quiz-step" style="display:none;">
+        <h2>Tus datos de contacto</h2>
+        <label>Nombre<input type="text" data-field="name" class="quiz-input" required></label>
+        <label>Teléfono<input type="tel" data-field="phone" class="quiz-input" required></label>
+        <label>Email<input type="email" data-field="email" class="quiz-input"></label>
+        <label><input type="checkbox" data-field="privacyAccepted"> He leído y acepto la <a href="privacidad.html">política de privacidad</a></label>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-top:24px;">
+        <button type="button" id="prevBtn" class="btn btn-ghost">Anterior</button>
+        <button type="button" id="nextBtn" class="btn btn-primary">Siguiente</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="assets/js/cuestionario.js"></script>
+</body>
+</html>

@@ -77,10 +77,12 @@
   opacity: .8;
   pointer-events: none;
 }
+/* Emblema oficial: proporción 190.05 x 111.43 (ratio 1.706), vectorizado del catálogo. */
 .hero-emblem-stage {
   perspective: 800px;
-  width: 120px; height: 84px;
-  margin-bottom: 28px;
+  width: clamp(124px, 16vw, 168px);
+  aspect-ratio: 190.05 / 111.43;
+  margin-bottom: 30px;
   z-index: 1;
 }
 .hero-emblem {
@@ -92,13 +94,17 @@
   from { transform: rotateY(0deg); }
   to   { transform: rotateY(360deg); }
 }
+/* Wordmark oficial: proporción 359.24 x 108.93 (ratio 3.298). Va como imagen, no
+   como texto con una fuente aproximada, para conservar las letras reales de marca. */
 .hero-wordmark {
-  font-family: var(--font-h); font-weight: 800;
-  font-size: clamp(40px, 7vw, 72px);
-  color: #fff; letter-spacing: -.01em;
+  margin: 0;
+  line-height: 0;
   z-index: 1;
 }
-.hero-wordmark .dot { color: var(--bd-sand-400); }
+.hero-wordmark img {
+  width: clamp(250px, 40vw, 420px);
+  height: auto;
+}
 .hero-by-line {
   z-index: 1;
   font-size: 14px; font-weight: 600; letter-spacing: .04em;

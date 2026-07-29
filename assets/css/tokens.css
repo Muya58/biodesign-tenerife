@@ -1,0 +1,20 @@
+:root {
+  /* Bio-Design Tenerife palette — distinct from Apavi Green's green brand */
+  --bd-navy-950: #060e1a;
+  --bd-navy-900: #0a1628;
+  --bd-navy-800: #142238;
+  --bd-navy-700: #1e3350;
+  --bd-sand-400: #e8c77e;
+  --bd-sand-300: #f2d999;
+  --bd-teal-400: #4fb8c4;
+  --bd-white: #ffffff;
+  --bd-ink-900: #12181f;
+
+  --font-h: 'Poppins', sans-serif;
+  --font-b: 'Inter', sans-serif;
+
+  --r8: 8px;
+  --r16: 16px;
+  --r20: 20px;
+  --r999: 999px;
+}

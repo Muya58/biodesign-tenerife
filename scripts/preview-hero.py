@@ -86,9 +86,13 @@ def main():
     base = base * (1.0 - alpha) + navy * alpha
     hero = Image.fromarray((np.clip(base, 0, 1) * 255).astype(np.uint8))
 
-    # Logotipo
-    emblem = svg_png('assets/img/emblem.svg', 168)
-    wordmark = svg_png('assets/img/wordmark.svg', 420)
+    # Logotipo. Se replican los clamp() del CSS: sin esto, un preview de móvil
+    # mostraría el wordmark desbordando cuando en el sitio real encaja de sobra.
+    def clamp(lo, preferred_vw, hi):
+        return int(round(min(max(lo, preferred_vw / 100 * vw), hi)))
+
+    emblem = svg_png('assets/img/emblem.svg', clamp(124, 16, 168))   # clamp(124px,16vw,168px)
+    wordmark = svg_png('assets/img/wordmark.svg', clamp(250, 40, 420))  # clamp(250px,40vw,420px)
     top = int(hh * 0.5 - 190)
     hero.paste(emblem, ((vw - emblem.width) // 2, top), emblem)
     hero.paste(wordmark, ((vw - wordmark.width) // 2, top + emblem.height + 30), wordmark)

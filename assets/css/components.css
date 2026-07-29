@@ -78,6 +78,11 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  /* En una piscina real la luz se concentra en el fondo, no en toda la columna de
+     agua. La máscara concentra las cáusticas en la mitad inferior: queda más creíble
+     y deja limpia la zona del logotipo. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 8%, rgba(0,0,0,.35) 42%, #000 78%);
+          mask-image: linear-gradient(to bottom, transparent 8%, rgba(0,0,0,.35) 42%, #000 78%);
 }
 .hero-water::before,
 .hero-water::after {
@@ -88,23 +93,25 @@
   mix-blend-mode: screen;
   will-change: transform;
 }
+/* Celdas grandes: con tiles pequeños el patrón se lee como una maraña y tapa el
+   bokeh de la foto, en vez de parecer luz sobre el fondo de la piscina. */
 .hero-water::before {
-  background-size: 440px 440px;
-  opacity: .17;
-  animation: caustics-drift-a 28s linear infinite;
+  background-size: 900px 900px;
+  opacity: .13;
+  animation: caustics-drift-a 34s linear infinite;
 }
 .hero-water::after {
-  background-size: 310px 310px;
-  opacity: .10;
-  animation: caustics-drift-b 39s linear infinite;
+  background-size: 620px 620px;
+  opacity: .07;
+  animation: caustics-drift-b 47s linear infinite;
 }
 @keyframes caustics-drift-a {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(440px, -440px, 0); }
+  to   { transform: translate3d(900px, -900px, 0); }
 }
 @keyframes caustics-drift-b {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-310px, -620px, 0); }
+  to   { transform: translate3d(-620px, -1240px, 0); }
 }
 
 /* Velo de profundidad: oscurece el centro para que el logo y los botones mantengan

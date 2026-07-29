@@ -6,3 +6,4 @@ node_modules/
 # Raw PNGs extracted from the Bio.design catalogue PDF (~95MB working set).
 # Only the curated, optimised subset in assets/img/realizaciones/ is committed.
 assets/img/catalogo-raw/
+hero-piscina.png

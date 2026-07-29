@@ -7,3 +7,9 @@ node_modules/
 # Only the curated, optimised subset in assets/img/realizaciones/ is committed.
 assets/img/catalogo-raw/
 hero-piscina.png
+hero-movil.png
+
+# Vault de Obsidian: notas internas de negocio. Este repositorio es público (GitHub
+# Pages no admite repos privados en el plan gratuito), así que el vault se versiona
+# aparte, en su propio repositorio privado. Ver "Vault BIODESIGN/LEEME.md".
+Vault BIODESIGN/

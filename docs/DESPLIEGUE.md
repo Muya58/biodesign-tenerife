@@ -1,5 +1,23 @@
 # Despliegue — Bio.design Tenerife (Fase 1)
 
+## Vista previa publicada (2026-07-29)
+
+**URL:** https://muya58.github.io/biodesign-tenerife/
+**Repositorio:** https://github.com/Muya58/biodesign-tenerife (público — GitHub Pages
+no admite repos privados en el plan gratuito)
+
+Es solo una vista previa del diseño. GitHub Pages sirve ficheros estáticos, así que
+**las funciones de `api/` no se ejecutan**: el cuestionario no guarda leads y `/admin`
+no puede autenticar. Ambos avisan al usuario en lugar de fallar en silencio.
+
+`robots.txt` bloquea el rastreo mientras sea una vista previa. Al lanzar en el dominio
+definitivo hay que sustituirlo (ver el propio fichero) y desactivar Pages o dejar el
+repositorio como espejo.
+
+El despliegue funcional completo requiere Vercel — pasos a continuación.
+
+---
+
 Pasos que debe hacer Josep con sus propias cuentas. Ninguno se pudo automatizar
 desde la sesión de desarrollo porque requieren credenciales.
 
@@ -16,11 +34,8 @@ Después, copia de la configuración del proyecto:
 
 ## 2. Repositorio en GitHub
 
-```bash
-gh repo create biodesign-tenerife --private --source=. --remote=origin --push
-```
-
-La rama de trabajo es `feat/fase1`. Fusiónala a `master` cuando valides el resultado.
+Ya creado y subido: https://github.com/Muya58/biodesign-tenerife (rama `master`).
+`feat/fase1` ya está fusionada.
 
 ## 3. Proyecto en Vercel
 

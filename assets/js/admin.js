@@ -8,14 +8,29 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
+function showLogin(message) {
+  document.getElementById('loginView').style.display = '';
+  document.getElementById('leadsView').style.display = 'none';
+  document.getElementById('loginError').textContent = message || '';
+}
+
 async function loadLeads() {
-  const res = await fetch('/api/admin-leads');
-  if (res.status === 401) {
-    document.getElementById('loginView').style.display = '';
-    document.getElementById('leadsView').style.display = 'none';
+  let res;
+  let data;
+  try {
+    res = await fetch('/api/admin-leads');
+    if (res.status === 401) {
+      showLogin();
+      return;
+    }
+    // A non-JSON body (HTML error page, static-only hosting) must not leave the
+    // panel blank with an uncaught parse error.
+    data = await res.json();
+  } catch {
+    showLogin('No se pudo contactar con el servidor.');
     return;
   }
-  const data = await res.json();
+
   renderLeads(data.leads);
   document.getElementById('loginView').style.display = 'none';
   document.getElementById('leadsView').style.display = '';
@@ -55,15 +70,23 @@ function renderLeads(leads) {
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const password = document.getElementById('passwordInput').value;
-  const res = await fetch('/api/admin-login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password }),
-  });
+  let res;
+  try {
+    res = await fetch('/api/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    });
+  } catch {
+    document.getElementById('loginError').textContent = 'No se pudo contactar con el servidor.';
+    return;
+  }
   if (res.ok) {
     loadLeads();
-  } else {
+  } else if (res.status === 401) {
     document.getElementById('loginError').textContent = 'Contraseña incorrecta';
+  } else {
+    document.getElementById('loginError').textContent = 'Error del servidor. Inténtalo de nuevo.';
   }
 });
 

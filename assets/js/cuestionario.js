@@ -19,13 +19,29 @@ function collectStepInputs() {
   });
 }
 
+const ERROR_GENERICO = 'No se pudo enviar el formulario. Inténtalo de nuevo o llámanos al +34 654 795 518.';
+
 async function submitLead() {
-  const res = await fetch('/api/leads', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(state),
-  });
-  const data = await res.json();
+  const btn = document.getElementById('nextBtn');
+  btn.disabled = true;
+
+  let res;
+  let data;
+  try {
+    res = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(state),
+    });
+    // The endpoint may answer with an HTML error page (502, misrouted request,
+    // static-only hosting), so a failed parse must not kill the handler.
+    data = await res.json();
+  } catch {
+    btn.disabled = false;
+    alert(ERROR_GENERICO);
+    return;
+  }
+
   const form = document.getElementById('quizForm');
   if (res.ok) {
     // Build the success view with text nodes so the user's own input is never
@@ -40,7 +56,8 @@ async function submitLead() {
     wrap.append(h, p);
     form.append(wrap);
   } else {
-    alert(Object.values(data.errors || { general: 'No se pudo enviar el formulario. Inténtalo de nuevo.' }).join('\n'));
+    btn.disabled = false;
+    alert(Object.values(data.errors || { general: ERROR_GENERICO }).join('\n'));
   }
 }
 

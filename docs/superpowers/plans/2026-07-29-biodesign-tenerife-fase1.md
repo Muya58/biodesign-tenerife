@@ -696,17 +696,37 @@ git commit -m "feat: quienes somos page with territorial exclusivity notice"
 
 Run: `ls assets/img/catalogo-raw | head -20` and open a sample of the largest files (already reviewed during brainstorming: `p04_0_1360x764.png`, `p11_0_1357x716.png`, `p12_1_1093x1263.png`, `p14_3_1157x988.png`, `p16_0_1070x1007.png` are confirmed real pool photography). Select at least 12 images with clear pool shots (skip logos/text-only pages, skip anything under 600px wide) and note the source filenames.
 
-- [ ] **Step 2: Copy and rename the selected images into `assets/img/realizaciones/`**
+- [ ] **Step 2: Convert and rename the selected images into `assets/img/realizaciones/` as optimised JPGs**
 
-```bash
-mkdir -p assets/img/realizaciones
-cp assets/img/catalogo-raw/p04_0_1360x764.png assets/img/realizaciones/piscina-privada-01.png
-cp assets/img/catalogo-raw/p11_0_1357x716.png assets/img/realizaciones/piscina-privada-02.png
-cp assets/img/catalogo-raw/p12_1_1093x1263.png assets/img/realizaciones/piscina-publica-01.png
-cp assets/img/catalogo-raw/p14_3_1157x988.png assets/img/realizaciones/piscina-privada-03.png
-cp assets/img/catalogo-raw/p16_0_1070x1007.png assets/img/realizaciones/piscina-privada-04.png
+The raw PNGs total ~95MB and are gitignored (`assets/img/catalogo-raw/`) — they are a working set extracted from the PDF, not shippable assets. Only the optimised JPG subset gets committed and deployed. Write and run this script (Pillow 12.2.0 is already installed):
+
+```python
+# scripts/optimize-gallery.py
+from PIL import Image
+from pathlib import Path
+
+RAW = Path('assets/img/catalogo-raw')
+OUT = Path('assets/img/realizaciones')
+OUT.mkdir(parents=True, exist_ok=True)
+
+# (source filename, output name) — fill in from the Step 1 selection
+SELECTION = [
+    ('p04_0_1360x764.png',  'piscina-privada-01.jpg'),
+    ('p11_0_1357x716.png',  'piscina-privada-02.jpg'),
+    ('p12_1_1093x1263.png', 'piscina-publica-01.jpg'),
+    ('p14_3_1157x988.png',  'piscina-privada-03.jpg'),
+    ('p16_0_1070x1007.png', 'piscina-privada-04.jpg'),
+]
+
+for src_name, out_name in SELECTION:
+    img = Image.open(RAW / src_name).convert('RGB')
+    img.thumbnail((1400, 1400), Image.LANCZOS)
+    img.save(OUT / out_name, 'JPEG', quality=82, optimize=True, progressive=True)
+    print(out_name, (OUT / out_name).stat().st_size // 1024, 'KB')
 ```
-(continue for the rest of the selected set from Step 1, alternating `piscina-privada-NN` / `piscina-publica-NN` based on what each photo actually shows — a residential backyard vs. a hotel/resort setting)
+
+Run: `python scripts/optimize-gallery.py`
+Expected: each output file well under 400KB. Extend `SELECTION` with the rest of the images chosen in Step 1, alternating `piscina-privada-NN` / `piscina-publica-NN` based on what each photo actually shows — a residential backyard vs. a hotel/resort setting.
 
 - [ ] **Step 3: Create `realizaciones.html`** (same head pattern, `<title>Realizaciones | Bio.design Tenerife</title>`) with this main content:
 
@@ -721,12 +741,13 @@ cp assets/img/catalogo-raw/p16_0_1070x1007.png assets/img/realizaciones/piscina-
         <button class="gallery-filter-btn" data-filter="publica">Piscina pública</button>
       </div>
       <div class="gallery-grid" id="galleryGrid">
-        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-01.png" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
-        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-02.png" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
-        <div class="gallery-item" data-category="publica"><img src="assets/img/realizaciones/piscina-publica-01.png" alt="Piscina de arena Bio.design pública" loading="lazy"></div>
-        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-03.png" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
-        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-04.png" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
+        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-01.jpg" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
+        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-02.jpg" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
+        <div class="gallery-item" data-category="publica"><img src="assets/img/realizaciones/piscina-publica-01.jpg" alt="Piscina de arena Bio.design pública" loading="lazy"></div>
+        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-03.jpg" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
+        <div class="gallery-item" data-category="privada"><img src="assets/img/realizaciones/piscina-privada-04.jpg" alt="Piscina de arena Bio.design privada" loading="lazy"></div>
       </div>
+      <p style="margin-top:24px; font-size:13px; color:rgba(255,255,255,.4);">Imágenes: catálogo oficial Bio.design S.p.A. Instalaciones realizadas por la red internacional de concesionarios Bio.design.</p>
     </div>
   </section>
   <script>

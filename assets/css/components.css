@@ -54,7 +54,11 @@
   font-family: var(--font-h);
   font-size: 12px; font-weight: 700;
   text-transform: uppercase; letter-spacing: .18em;
-  color: var(--bd-sand-400);
+  color: var(--bd-sand-300);
+  /* El antetítulo cae más arriba que el titular, donde el degradado ya es débil, y
+     sobre zonas claras de la foto (un techo de paja, arena al sol) se volvía ilegible.
+     La sombra lo despega del fondo sin recuadrarlo. */
+  text-shadow: 0 1px 3px rgba(6,14,26,.95), 0 2px 16px rgba(6,14,26,.85);
   margin-bottom: 12px;
 }
 .page-hero h1 {

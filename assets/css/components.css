@@ -103,6 +103,9 @@
   padding: 36px;
   backdrop-filter: blur(6px);
 }
+/* Al invertir hay que invertir también las proporciones de las columnas: si no, la
+   foto se queda con la columna estrecha y los dos bloques salen descompensados. */
+.feature-split.reverse { grid-template-columns: .95fr 1.05fr; }
 .feature-split.reverse .feature-split-media { order: 2; }
 .feature-split.reverse .feature-split-body {
   order: 1;
@@ -114,7 +117,11 @@
 
 /* En móvil se apila y desaparece el solape, que ahí no aporta y aprieta el texto. */
 @media (max-width: 860px) {
-  .feature-split { grid-template-columns: 1fr; margin-bottom: 36px; }
+  /* .reverse se repite aquí a propósito: `.feature-split.reverse` tiene dos clases y
+     gana en especificidad a `.feature-split`, así que sin esta línea el bloque
+     invertido NO se apila y la foto se queda en unos 115px de ancho. */
+  .feature-split,
+  .feature-split.reverse { grid-template-columns: 1fr; margin-bottom: 36px; }
   .feature-split-body,
   .feature-split.reverse .feature-split-body {
     margin: -28px 16px 0;

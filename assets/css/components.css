@@ -16,6 +16,114 @@
   padding: 32px;
 }
 
+/* ── Cabecera a sangre de páginas interiores ──────────────────────────────────
+   Mismo lenguaje que bio.design: banda fotográfica ancha, antetítulo en
+   mayúsculas espaciadas y el titular encima, alineado abajo a la izquierda. */
+.page-hero {
+  position: relative;
+  min-height: clamp(280px, 38vw, 440px);
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--bd-navy-900);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* El degradado va en ::before para que el contenido (z-index 1) quede por encima
+   sin necesidad de tocar el apilado del resto de la página. */
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(6,14,26,.92) 0%,
+    rgba(6,14,26,.62) 38%,
+    rgba(6,14,26,.20) 70%,
+    rgba(6,14,26,.35) 100%
+  );
+}
+.page-hero > .container {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 44px;
+  padding-top: 80px;
+  width: 100%;
+}
+.page-hero-eyebrow {
+  display: block;
+  font-family: var(--font-h);
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .18em;
+  color: var(--bd-sand-400);
+  margin-bottom: 12px;
+}
+.page-hero h1 {
+  margin-bottom: 12px;
+  max-width: 22ch;
+  text-shadow: 0 2px 24px rgba(6,14,26,.7);
+}
+.page-hero-sub {
+  margin: 0;
+  max-width: 56ch;
+  font-size: 17px;
+  color: rgba(255,255,255,.82);
+  text-shadow: 0 1px 14px rgba(6,14,26,.8);
+}
+/* La primera sección tras la cabecera no necesita tanto aire por arriba. */
+.page-hero + section { padding-top: 64px; }
+
+/* ── Bloques de foto y texto alternados ──────────────────────────────────────
+   La tarjeta de texto se solapa sobre la foto, alternando lado, como los
+   overlap-left / overlap-right de la web oficial. */
+.feature-split {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 56px;
+}
+.feature-split:last-child { margin-bottom: 0; }
+.feature-split-media {
+  border-radius: var(--r16);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+}
+.feature-split-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.feature-split-body {
+  position: relative;
+  z-index: 1;
+  margin-left: -56px;
+  background: rgba(10,22,40,.94);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r16);
+  padding: 36px;
+  backdrop-filter: blur(6px);
+}
+.feature-split.reverse .feature-split-media { order: 2; }
+.feature-split.reverse .feature-split-body {
+  order: 1;
+  margin-left: 0;
+  margin-right: -56px;
+}
+.feature-split-body h2 { font-size: clamp(21px, 2.4vw, 28px); }
+.feature-split-body p:last-child { margin-bottom: 0; }
+
+/* En móvil se apila y desaparece el solape, que ahí no aporta y aprieta el texto. */
+@media (max-width: 860px) {
+  .feature-split { grid-template-columns: 1fr; margin-bottom: 36px; }
+  .feature-split-body,
+  .feature-split.reverse .feature-split-body {
+    margin: -28px 16px 0;
+    padding: 28px;
+  }
+  .feature-split.reverse .feature-split-media { order: 0; }
+  .feature-split.reverse .feature-split-body { order: 0; }
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

@@ -9,7 +9,11 @@ assets/img/catalogo-raw/
 hero-piscina.png
 hero-movil.png
 
-# Vault de Obsidian: notas internas de negocio. Este repositorio es público (GitHub
-# Pages no admite repos privados en el plan gratuito), así que el vault se versiona
+# Vaults de Obsidian: notas internas de negocio. Este repositorio es público (GitHub
+# Pages no admite repos privados en el plan gratuito), así que los vaults se versionan
 # aparte, en su propio repositorio privado. Ver "Vault BIODESIGN/LEEME.md".
+#
+# ⚠️ Si renombras o creas otro vault, AÑÁDELO AQUÍ ANTES de hacer commit. Estas reglas
+# van por nombre exacto de carpeta; un vault sin listar acabaría publicado.
 Vault BIODESIGN/
+Bio-desing by Apavi Green/

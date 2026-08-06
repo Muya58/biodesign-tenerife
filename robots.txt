@@ -1,8 +1,8 @@
-# Vista previa — todavía no indexable.
-# Al lanzar en el dominio definitivo, sustituir por:
-#   User-agent: *
-#   Allow: /
-#   Disallow: /admin/
-#   Sitemap: https://<dominio-real>/sitemap.xml
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /admin/
+Disallow: /privacidad.html
+Disallow: /aviso-legal.html
+Disallow: /cookies.html
+
+Sitemap: https://biodesign-tenerife.com/sitemap.xml

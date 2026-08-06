@@ -5,4 +5,4 @@ Disallow: /privacidad.html
 Disallow: /aviso-legal.html
 Disallow: /cookies.html
 
-Sitemap: https://biodesign-tenerife.com/sitemap.xml
+Sitemap: https://piscinadearenatenerife.com/sitemap.xml

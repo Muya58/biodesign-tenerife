@@ -19,7 +19,7 @@ function collectStepInputs() {
   });
 }
 
-const ERROR_GENERICO = 'No se pudo enviar el formulario. Inténtalo de nuevo o llámanos al +34 654 795 518.';
+const ERROR_GENERICO = 'No se pudo enviar el formulario. Inténtalo de nuevo o llámanos al +34 654 765 548.';
 
 async function submitLead() {
   const btn = document.getElementById('nextBtn');
